@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/new/img">
-        <file>1938347.png</file>
-    </qresource>
-    <qresource prefix="/">
-        <file>maxresdefault.jpg</file>
+        <file>img/1938347.png</file>
+        <file>img/maxresdefault.jpg</file>
+        <file>img/maxresdefault1.jpg</file>
+        <file>img/Delta.png</file>
+        <file>img/check.png</file>
     </qresource>
 </RCC>

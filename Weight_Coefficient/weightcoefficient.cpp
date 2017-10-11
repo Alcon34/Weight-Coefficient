@@ -50,72 +50,49 @@ WeightCoefficient::WeightCoefficient(QWidget *parent) :
     ui->lineEdit->setDisabled(true);
     ui->lineEdit_2->setDisabled(true);
 
-
-
-}
-
-void WeightCoefficient::Calculation_of_mass_v1()
-{
-    float Weight_Relations = ui->lineEdit_35->text().toFloat();
-    float Theoretical_Mass =  ui->lineEdit_36->text().toFloat();
-    ui->lineEdit_39->setText(QVariant((100*(Theoretical_Mass/(Weight_Relations+100)))/ui->lineEdit->text().toFloat()).toString());
-    ui->lineEdit_40->setText(QVariant((Weight_Relations*(Theoretical_Mass/(Weight_Relations+100)))/ui->lineEdit_2->text().toFloat()).toString());
-}
-
-void WeightCoefficient::Calculation_of_mass_v2()
-{
-    float Weight_Relations = ui->lineEdit_35->text().toFloat();
-    float Component_Weight_A =  ui->lineEdit_39->text().toFloat();
-    ui->lineEdit_36->setText(QVariant(Component_Weight_A*((100+Weight_Relations)/100)).toString());
-    ui->lineEdit_40->setText(QVariant((((Component_Weight_A*((100+Weight_Relations)/100))/(100+Weight_Relations))*Weight_Relations)/ui->lineEdit_2->text().toFloat()).toString());
-}
-
-void WeightCoefficient::Calculation_of_mass_v3()
-{
-    float Weight_Relations = ui->lineEdit_35->text().toFloat();
-    float Component_Weight_B =  ui->lineEdit_40->text().toFloat();
-    ui->lineEdit_39->setText(QVariant((Component_Weight_B*((100/Weight_Relations)))/ui->lineEdit->text().toFloat()).toString());
-    ui->lineEdit_36->setText(QVariant(Component_Weight_B*((100/Weight_Relations))+Component_Weight_B).toString());
-
 }
 
 void WeightCoefficient::on_pushButton_4_clicked() //1 кнопка рачитать
 {
-    Calculation_of_mass_v1();
+
 
 }
 
 void WeightCoefficient::on_pushButton_clicked() //2 кнопка рачитать
 {
-    Calculation_of_mass_all();
+    Calculation_of_mass(1);
+
 }
 
-void WeightCoefficient::Calculation_of_mass_all() //расчет весового коффициента
+void WeightCoefficient::Calculation_of_mass(int i)
 {
-     float Component_Weight_A =  ui->lineEdit_39->text().toDouble();
-     float Component_Weight_B =  ui->lineEdit_40->text().toDouble();
+    double Component_Weight_A_1 =  ui->lineEdit_39->text().toDouble();
+    double Component_Weight_A_2 =  ui->lineEdit_39->text().toDouble();
+    double Component_Weight_A_3 =  ui->lineEdit_39->text().toDouble();
+    double Component_Weight_A_1_st =  ui->lineEdit_40->text().toDouble();
+    double Component_Weight_A_2_st =  ui->lineEdit_40->text().toDouble();
+    double Component_Weight_A_3_st =  ui->lineEdit_40->text().toDouble();
 
-     float Massing_A_st = ui->lineEdit_3->text().toFloat()+ui->lineEdit_5->text().toDouble()+ui->lineEdit_7->text().toDouble();
-     float Massing_B_st = ui->lineEdit_9->text().toFloat()+ui->lineEdit_10->text().toDouble()+ui->lineEdit_11->text().toDouble();
+    double Component_Weight_B_1 =  ui->lineEdit_40->text().toDouble();
+    double Component_Weight_B_2 =  ui->lineEdit_40->text().toDouble();
+    double Component_Weight_B_3 =  ui->lineEdit_40->text().toDouble();
+    double Component_Weight_B_1_st =  ui->lineEdit_40->text().toDouble();
+    double Component_Weight_B_2_st =  ui->lineEdit_40->text().toDouble();
+    double Component_Weight_B_3_st =  ui->lineEdit_40->text().toDouble();
 
-     float Massing_A = ui->lineEdit_4->text().toFloat()+ui->lineEdit_6->text().toDouble()+ui->lineEdit_8->text().toDouble();
-     float Massing_B = ui->lineEdit_12->text().toFloat()+ui->lineEdit_13->text().toDouble()+ui->lineEdit_14->text().toDouble();
-     qDebug()<<" Massing_A_st"<<Massing_A_st ;
-     qDebug() <<" Massing_B_st"<<Massing_B_st ;
-     qDebug() <<" Massing_A"<<Massing_A ;
-     qDebug() <<" Massing_B"<<Massing_B ;
+    double Weight_A = 1;
+    double Weight_B = 2;
 
-     double da = Massing_A-Massing_A_st;
-     double db = Massing_B-Massing_B_st;
+    double Component_Weight_A_sum_st = Component_Weight_A_1_st+Component_Weight_A_2_st+Component_Weight_A_3_st;
+    double Component_Weight_B_sum_st = Component_Weight_B_1_st+Component_Weight_B_2_st+Component_Weight_B_3_st;
+    double Component_Weight_A_sum = Component_Weight_A_1+Component_Weight_A_2+Component_Weight_A_3;
+    double Component_Weight_B_sum = Component_Weight_B_1+Component_Weight_B_2+Component_Weight_B_3;
 
-     double da_end = (da/3)/Component_Weight_A;
-     double db_end = (db/3)/Component_Weight_B;
+    double Coefficient_A_end = ((Component_Weight_A_sum_st+Component_Weight_A_sum)/i)/Weight_A;
+    double Coefficient_B_end = ((Component_Weight_B_sum_st+Component_Weight_B_sum)/i)/Weight_B;
 
-     double da_end_ten = roundDouble(da_end, 3);
-     double db_end_ten = roundDouble(db_end, 3);
-
-     ui->lineEdit_27->setText(QVariant(da_end_ten).toString());
-     ui->lineEdit_28->setText(QVariant(db_end_ten).toString());
+    ui->lineEdit_27->setText(QVariant(Coefficient_A_end).toString());
+    ui->lineEdit_28->setText(QVariant(Coefficient_B_end).toString());
 }
 
 double WeightCoefficient::roundDouble(double doValue, int nPrecision)//преобразование точности

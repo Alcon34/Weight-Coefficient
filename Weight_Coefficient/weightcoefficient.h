@@ -21,13 +21,10 @@ private:
     Ui::WeightCoefficient *ui;
 
 private slots:
-    void Calculation_of_mass_v1();
-    void Calculation_of_mass_v2();
-    void Calculation_of_mass_v3();
-    void Calculation_of_mass_all();
     double roundDouble(double doValue, int nPrecision);
     void on_pushButton_4_clicked();
     void on_pushButton_clicked();
+    void Calculation_of_mass(int i);
 };
 
 #endif // WEIGHTCOEFFICIENT_H
